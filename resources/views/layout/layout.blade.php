@@ -56,6 +56,7 @@
     </nav>
 
     <div class="container">
+        @include('layout.flash-message')
         @yield('content')
     </div>
 </body>

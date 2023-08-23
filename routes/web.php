@@ -36,6 +36,8 @@ Route::prefix('dashboard')->group(function(){
     Route::get('/cabang',[CabangController::class,'index'])->name('cabangIndex');
     Route::get('/cabang/tambah',[CabangController::class,'create'])->name('tambahCabang');
     Route::post('/cabang/simpan',[CabangController::class,'store'])->name('simpanCabang');
+    Route::get('/cabang/edit/{id}',[CabangController::class,'edit']);
+    Route::post('/cabang/edit/simpan',[CabangController::class,'store'])->name('simpanEditCabang');
 });
 
 Route::prefix('kasir')->middleware(['auth'])->group(function(){

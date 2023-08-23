@@ -47,19 +47,31 @@ class CabangController extends Controller
                 'kode_cabang' => ['required'],
                 'alamat'    => ['required'],
                 'kontak_cabang' => ['required'],
-            
             ]
         );
-
-        if($data):
-            $data['id_perusahaan'] = 1;
-        //Simpan jika data terisi semua
-            $cabang->create($data);
-            return redirect('/dashboard/cabang');
-        else:
-        //Kembali ke form tambah data
-            return redirect('/dashboard/cabang/tambah');
-        endif;
+        if($request->input('id_cabang') !== null ){
+            //Proses Update
+            $dataUpdate = Cabang::where('id_cabang',$request->input('id_cabang'))
+                            ->update($data);
+            if($dataUpdate){
+                return redirect('/dashboard/cabang')->with('success','Data Cabang berhasil di update');
+            }else{
+                return back()->with('error','Data Cabang gagal di update');
+            }
+        }
+        else{
+            //Proses Insert
+            if($data):
+                $data['id_perusahaan'] = 1;
+            //Simpan jika data terisi semua
+                $cabang->create($data);
+                return redirect('/dashboard/cabang')->with('success','Data cabang baru berhasil ditambah');
+            else:
+            //Kembali ke form tambah data
+                return back()->with('error','Data cabang gagal ditambahkan');
+            endif;
+        }
+       
     }
 
     /**
@@ -73,9 +85,15 @@ class CabangController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Cabang $cabang)
+    public function edit(Request $request)
     {
-        //
+
+        //Tampilkan form untuk edit data
+        $data = [
+          'cabang' =>  Cabang::where('id_cabang',$request->id)->first()
+        ];
+        //Lempar data ke view
+        return view('cabang.edit',$data);
     }
 
     /**

@@ -46,11 +46,11 @@ class PerusahaanController extends Controller
             Perusahaan::where('id_perusahaan',$request->get('id_perusahaan'))
                         ->update($validate);
             //if($update):
-                return redirect('/dashboard/perusahaan');
+                return redirect('/dashboard/perusahaan')->with('success','Data Perusahaan berhasil di update');
             //endif;
 
         else:
-            return redirect('/dashboard/perusahaan/edit');
+            return redirect('/dashboard/perusahaan/edit')->with('error','Data Perusahaan gagal di edit');
         endif;
     }
 

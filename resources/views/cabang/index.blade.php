@@ -37,7 +37,7 @@
                                     <a href="cabang/edit/{{$r->id_cabang}}">
                                         <btn class="btn btn-primary">EDIT</btn>
                                     </a>
-                                    
+
                                     <a href="cabang/hapus/{{$r->id_cabang}}">
                                         <btn class="btn btn-danger">HAPUS</btn>
                                     </a>
