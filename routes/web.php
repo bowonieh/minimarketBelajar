@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\CabangController;
 use App\Http\Controllers\Dashboard;
 use App\Http\Controllers\PerusahaanController;
 use Illuminate\Support\Facades\Route;
@@ -32,6 +33,9 @@ Route::prefix('dashboard')->group(function(){
     Route::get('/perusahaan',[PerusahaanController::class,'index'])->name('listPerusahaan');
     Route::get('/perusahaan/edit',[PerusahaanController::class,'edit'])->name('editPerusahaan');
     Route::post('/perusahaan/simpan',[PerusahaanController::class,'store'])->name('simpanPerusahaan');
+    Route::get('/cabang',[CabangController::class,'index'])->name('cabangIndex');
+    Route::get('/cabang/tambah',[CabangController::class,'create'])->name('tambahCabang');
+    Route::post('/cabang/simpan',[CabangController::class,'store'])->name('simpanCabang');
 });
 
 Route::prefix('kasir')->middleware(['auth'])->group(function(){

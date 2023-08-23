@@ -23,7 +23,7 @@
         /* Show it is fixed to the top */
         body {
             min-height: 75rem;
-            padding-top: 4.5rem;
+            padding-top: 5.5rem;
         }
     </style>
 </head>

@@ -10,9 +10,17 @@ class CabangController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Cabang $cabang)
     {
-        //
+        //Menampilkan data cabang
+        /*
+        1. Ambil semua data cabang
+        2. Tampilkan seluruh data cabang ke view dengan format tabel
+        */
+        $data = [
+            'cabang'=> $cabang->all()
+        ];
+        return view('cabang.index',$data);
     }
 
     /**
@@ -21,14 +29,37 @@ class CabangController extends Controller
     public function create()
     {
         //
+        /*
+        1. Membuat form untuk menambah data
+        */
+        return view('cabang.tambah');
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(Request $request, Cabang $cabang)
     {
         //
+        $data = $request->validate(
+            [
+                'nama' => ['required'],
+                'kode_cabang' => ['required'],
+                'alamat'    => ['required'],
+                'kontak_cabang' => ['required'],
+            
+            ]
+        );
+
+        if($data):
+            $data['id_perusahaan'] = 1;
+        //Simpan jika data terisi semua
+            $cabang->create($data);
+            return redirect('/dashboard/cabang');
+        else:
+        //Kembali ke form tambah data
+            return redirect('/dashboard/cabang/tambah');
+        endif;
     }
 
     /**
