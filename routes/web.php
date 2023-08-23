@@ -30,6 +30,8 @@ Route::middleware(['auth','isAdmin'])->group(function(){
 //Routing Perusahaan
 Route::prefix('dashboard')->group(function(){
     Route::get('/perusahaan',[PerusahaanController::class,'index'])->name('listPerusahaan');
+    Route::get('/perusahaan/edit',[PerusahaanController::class,'edit'])->name('editPerusahaan');
+    Route::post('/perusahaan/simpan',[PerusahaanController::class,'store'])->name('simpanPerusahaan');
 });
 
 Route::prefix('kasir')->middleware(['auth'])->group(function(){

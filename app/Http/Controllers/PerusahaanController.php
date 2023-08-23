@@ -34,6 +34,24 @@ class PerusahaanController extends Controller
     public function store(Request $request)
     {
         //
+        $validate = $request->validate(
+            [
+                'id_perusahaan'   => ['required'],
+                'nama_perusahaan' => ['required'],
+                'alamat'          => ['required'],
+                'npwp'            => ['required']
+            ]
+        );
+        if ($validate):
+            Perusahaan::where('id_perusahaan',$request->get('id_perusahaan'))
+                        ->update($validate);
+            //if($update):
+                return redirect('/dashboard/perusahaan');
+            //endif;
+
+        else:
+            return redirect('/dashboard/perusahaan/edit');
+        endif;
     }
 
     /**
@@ -50,6 +68,8 @@ class PerusahaanController extends Controller
     public function edit(Perusahaan $perusahaan)
     {
         //
+        $data = $perusahaan::first();
+        return view('perusahaan.edit',$data);
     }
 
     /**

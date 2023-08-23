@@ -41,7 +41,7 @@
                 </div>
             </div>
             <div class="card-footer">
-                <btn class="btn btn-primary"><i class=""></i> Edit</btn>
+                <a href="perusahaan/edit"><btn class="btn btn-primary"><i class=""></i> Edit</btn></a>
             </div>
         </div>
     </div>
