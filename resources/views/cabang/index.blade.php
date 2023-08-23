@@ -1,5 +1,5 @@
 @extends('layout.layout')
-@section('title','Daftar Cabang ')
+@section('title','Daftar Cabang')
 @section('content')
 <div class="row">
     <div class="col-md-12">
@@ -15,7 +15,7 @@
                         <a href="cabang/tambah">
                             <btn class="btn btn-success">Tambah Cabang</btn>
                         </a>
-                       
+
                     </div>
                     <p>
                         <hr>
@@ -38,9 +38,9 @@
                                         <btn class="btn btn-primary">EDIT</btn>
                                     </a>
 
-                                    <a href="cabang/hapus/{{$r->id_cabang}}">
-                                        <btn class="btn btn-danger">HAPUS</btn>
-                                    </a>
+
+                                    <btn class="btn btn-danger" id="btnHapus" attr-id="{{$r->id_bencana}}">HAPUS</btn>
+
                                 </td>
                             </tr>
                             @endforeach
@@ -53,4 +53,13 @@
         </div>
     </div>
 </div>
+@endsection
+
+@section('footer')
+<script type="module">
+    $('#btnHapus').on('click',function(){
+        alert("dn")
+    });
+</script>
+
 @endsection
