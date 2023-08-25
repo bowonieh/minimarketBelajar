@@ -13,16 +13,11 @@ return new class extends Migration
     {
         Schema::create('barang', function (Blueprint $table) {
            $table->integer('id_barang',true);
-           $table->integer('id_cabang',false)->index('idCabang');
+           $table->bigInteger('barcode')->nullable(false);
            $table->string('nama_barang',100)->nullable(false);
            #$table->decimal('stok',8,0)->default(0)->nullable(false);
            #$table->decimal('harga',8,0)->default(0)->nullable(false);
-           $table->integer('harga',false)->nullable(false);
-           $table->integer('stok',false)->nullable(false);
-           //Foreign 
-           $table->foreign('id_cabang')
-                ->references('id_cabang')->on('cabang')
-                ->onDelete('cascade')->onUpdate('cascade');
+          
         });
     }
 
