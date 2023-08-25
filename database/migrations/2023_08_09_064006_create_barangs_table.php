@@ -15,6 +15,7 @@ return new class extends Migration
            $table->integer('id_barang',true);
            $table->bigInteger('barcode')->nullable(false);
            $table->string('nama_barang',100)->nullable(false);
+           $table->text('foto_barang')->nullable(true);
            #$table->decimal('stok',8,0)->default(0)->nullable(false);
            #$table->decimal('harga',8,0)->default(0)->nullable(false);
           
