@@ -16,6 +16,7 @@ return new class extends Migration
             $table->integer('id_barang', false)->index('idBarangMasuk')->nullable(false);
             $table->integer('id_cabang', false)->index('idCabangMasuk')->nullable(false);
             $table->date('tanggal')->nullable(false)->default('2022-01-01');
+            $table->text('dokumen')->nullable(true);
             $table->integer('jumlah')->nullable(false)->default(0);
             //Foreign Key
             $table->foreign('id_barang')->on('barang')

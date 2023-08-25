@@ -12,7 +12,11 @@ class BarangController extends Controller
      */
     public function index()
     {
-        //
+        //Tampilkan daftar barang
+        $data = [
+            'barang' => Barang::all()
+        ];
+        return view('barang.index',$data);
     }
 
     /**
@@ -21,6 +25,7 @@ class BarangController extends Controller
     public function create()
     {
         //
+        return view('barang.tambah');
     }
 
     /**

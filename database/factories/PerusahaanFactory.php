@@ -18,6 +18,9 @@ class PerusahaanFactory extends Factory
     {
         return [
             //
+            'nama_perusahaan' => 'PT. INDOMARCO',
+            'npwp'  => 45553434,
+            'alamat' => 'Bekasi'
         ];
     }
 }
