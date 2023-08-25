@@ -38,6 +38,7 @@ Route::prefix('dashboard')->group(function(){
     Route::post('/cabang/simpan',[CabangController::class,'store'])->name('simpanCabang');
     Route::get('/cabang/edit/{id}',[CabangController::class,'edit']);
     Route::post('/cabang/edit/simpan',[CabangController::class,'store'])->name('simpanEditCabang');
+    Route::delete('/cabang/hapus',[CabangController::class,'destroy'])->name('hapusCabang');
 });
 
 Route::prefix('kasir')->middleware(['auth'])->group(function(){

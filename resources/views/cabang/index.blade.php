@@ -38,7 +38,7 @@
                                     <td>{{$r->kontak_cabang}}</td>
                                     <td>
                                         <a href="cabang/edit/{{$r->id_cabang}}"><btn class="btn btn-primary">EDIT</btn></a>
-                                        <btn class="btn btn-danger" id="btnHapus" attr-id="{{$r->id_bencana}}">HAPUS</btn>
+                                        <btn class="btn btn-danger btnHapus" idCabang="{{$r->id_cabang}}">HAPUS</btn>
 
                                     </td>
                                 </tr>
@@ -57,8 +57,38 @@
 
 @section('footer')
 <script type="module">
-    $('#btnHapus').on('click',function(){
-        alert("dn")
+    $('.DataTable tbody').on('click','.btnHapus',function(a){
+        a.preventDefault();
+        let idCabang = $(this).closest('.btnHapus').attr('idCabang');
+        //alert(id_cabang)
+        swal.fire({
+            title : "Apakah anda ingin menghapus data ini?",
+            showCancelButton: true,
+            confirmButtonText: 'Setuju',
+            cancelButtonText: `Batal`,
+            confirmButtonColor: 'red'
+
+        }).then((result)=>{
+            if(result.isConfirmed){
+                //Ajax Delete
+                $.ajax({
+                    type: 'DELETE',
+                    url: 'cabang/hapus',
+                    data: {
+                        id_cabang : idCabang,
+                        _token : "{{csrf_token()}}"
+                    },
+                    success : function(data){
+                        if(data.success){
+                            swal.fire('Berhasil di hapus!', '', 'success').then(function(){
+                                //Refresh Halaman
+                                location.reload();
+                            });
+                        }
+                    }
+                });
+            }
+        });
     });
     $(document).ready(function() {
         $('.DataTable').DataTable();

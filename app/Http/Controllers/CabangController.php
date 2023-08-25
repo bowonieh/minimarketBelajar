@@ -107,8 +107,25 @@ class CabangController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Cabang $cabang)
+    public function destroy(Cabang $cabang, Request $request)
     {
         //
+        $id_cabang = $request->input('id_cabang');
+        //Hapus 
+        $aksi = $cabang->where('id_cabang',$id_cabang)->delete();
+        if($aksi):
+            //Pesan Berhasil
+            $pesan = [
+                'success'   => true,
+                'pesan'     => 'Data cabang berhasil dihapus'
+            ];
+        else:
+            //Pesan Gagal
+            $pesan = [
+                'success' => false,
+                'pesan'     => 'Data gagal dihapus'
+            ];
+        endif;
+        return response()->json($pesan);
     }
 }
