@@ -19,31 +19,31 @@
                     </div>
                     <p>
                         <hr>
-                        <table class="table table-hover table-bordered">
-                            <tr>
-                                <th>NAMA CABANG</th>
-                                <th>KODE CABANG</th>
-                                <th>ALAMAT</th>
-                                <th>KONTAK</th>
-                                <th>AKSI</th>
-                            </tr>
-                            @foreach($cabang as $r)
-                            <tr>
-                                <td>{{$r->nama}}</td>
-                                <td>{{$r->kode_cabang}}</td>
-                                <td>{{$r->alamat}}</td>
-                                <td>{{$r->kontak_cabang}}</td>
-                                <td>
-                                    <a href="cabang/edit/{{$r->id_cabang}}">
-                                        <btn class="btn btn-primary">EDIT</btn>
-                                    </a>
+                        <table class="table table-hover table-bordered DataTable">
+                            <thead>
+                                <tr>
+                                    <th>NAMA CABANG</th>
+                                    <th>KODE CABANG</th>
+                                    <th>ALAMAT</th>
+                                    <th>KONTAK</th>
+                                    <th>AKSI</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach($cabang as $r)
+                                <tr>
+                                    <td>{{$r->nama}}</td>
+                                    <td>{{$r->kode_cabang}}</td>
+                                    <td>{{$r->alamat}}</td>
+                                    <td>{{$r->kontak_cabang}}</td>
+                                    <td>
+                                        <a href="cabang/edit/{{$r->id_cabang}}"><btn class="btn btn-primary">EDIT</btn></a>
+                                        <btn class="btn btn-danger" id="btnHapus" attr-id="{{$r->id_bencana}}">HAPUS</btn>
 
-
-                                    <btn class="btn btn-danger" id="btnHapus" attr-id="{{$r->id_bencana}}">HAPUS</btn>
-
-                                </td>
-                            </tr>
-                            @endforeach
+                                    </td>
+                                </tr>
+                                @endforeach
+                            </tbody>
                         </table>
                 </div>
             </div>
@@ -59,6 +59,9 @@
 <script type="module">
     $('#btnHapus').on('click',function(){
         alert("dn")
+    });
+    $(document).ready(function() {
+        $('.DataTable').DataTable();
     });
 </script>
 
