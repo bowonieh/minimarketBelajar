@@ -20,27 +20,29 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
-Route::get('login',[AuthController::class,'index'])->name('login');
-Route::post('login',[AuthController::class,'check']);
-Route::get('logout',[AuthController::class,'logout'])->name('logout');
+Route::get('login', [AuthController::class, 'index'])->name('login');
+Route::post('login', [AuthController::class, 'check']);
+Route::get('logout', [AuthController::class, 'logout'])->name('logout');
 
-Route::middleware(['auth','isAdmin'])->group(function(){
-    Route::get('/dashboard',[Dashboard::class,'index'])->name('dashboardAdmin');
+Route::middleware(['auth', 'isAdmin'])->group(function () {
+    Route::get('/dashboard', [Dashboard::class, 'index'])->name('dashboardAdmin');
 });
 
 //Routing Perusahaan
-Route::prefix('dashboard')->group(function(){
-    Route::get('/perusahaan',[PerusahaanController::class,'index'])->name('listPerusahaan');
-    Route::get('/perusahaan/edit',[PerusahaanController::class,'edit'])->name('editPerusahaan');
-    Route::post('/perusahaan/simpan',[PerusahaanController::class,'store'])->name('simpanPerusahaan');
-    Route::get('/cabang',[CabangController::class,'index'])->name('cabangIndex');
-    Route::get('/cabang/tambah',[CabangController::class,'create'])->name('tambahCabang');
-    Route::post('/cabang/simpan',[CabangController::class,'store'])->name('simpanCabang');
-    Route::get('/cabang/edit/{id}',[CabangController::class,'edit']);
-    Route::post('/cabang/edit/simpan',[CabangController::class,'store'])->name('simpanEditCabang');
-    Route::delete('/cabang/hapus',[CabangController::class,'destroy'])->name('hapusCabang');
-});
+Route::prefix('dashboard')
+    ->middleware(['checkAdmin'])
+    ->group(function () {
+        Route::get('/perusahaan', [PerusahaanController::class, 'index'])->name('listPerusahaan');
+        Route::get('/perusahaan/edit', [PerusahaanController::class, 'edit'])->name('editPerusahaan');
+        Route::post('/perusahaan/simpan', [PerusahaanController::class, 'store'])->name('simpanPerusahaan');
+        Route::get('/cabang', [CabangController::class, 'index'])->name('cabangIndex');
+        Route::get('/cabang/tambah', [CabangController::class, 'create'])->name('tambahCabang');
+        Route::post('/cabang/simpan', [CabangController::class, 'store'])->name('simpanCabang');
+        Route::get('/cabang/edit/{id}', [CabangController::class, 'edit']);
+        Route::post('/cabang/edit/simpan', [CabangController::class, 'store'])->name('simpanEditCabang');
+        Route::delete('/cabang/hapus', [CabangController::class, 'destroy'])->name('hapusCabang');
+    });
 
-Route::prefix('kasir')->middleware(['auth'])->group(function(){
-    Route::get('/dashboard',[DashboardKasir::class,'index'])->name('dashboardKasir');
+Route::prefix('kasir')->middleware(['auth'])->group(function () {
+    Route::get('/dashboard', [DashboardKasir::class, 'index'])->name('dashboardKasir');
 });
